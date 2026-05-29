@@ -1,0 +1,62 @@
+{
+  "cozinha": [
+    { "nome": "Kit Facas Premium", "desc": "Qualidade profissional para o cozinheiro que há em você.", "preco": "129,90", "badge": "Destaque", "img": "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=600" },
+    { "nome": "Tábua de Corte Bambu", "desc": "Resistente e sustentável, ideal para o dia a dia.", "preco": "59,90", "badge": "Novo", "img": "https://images.unsplash.com/photo-1590794056226-79ef3a8147e1?w=600" },
+    { "nome": "Panela Antiaderente", "desc": "Cozinhe com menos gordura e mais sabor.", "preco": "89,90", "badge": "", "img": "https://images.unsplash.com/photo-1585515320310-259814833e62?w=600" },
+    { "nome": "Conjunto de Tigelas", "desc": "Praticidade e estilo em cada preparo.", "preco": "74,90", "badge": "Popular", "img": "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600" },
+    { "nome": "Escorredor de Louças", "desc": "Organização e higiene após cada refeição.", "preco": "49,90", "badge": "", "img": "https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?w=600" },
+    { "nome": "Jogo de Potes Herméticos", "desc": "Conserve alimentos por mais tempo com praticidade.", "preco": "64,90", "badge": "Novo", "img": "https://images.unsplash.com/photo-1610348725531-843dff563e2c?w=600" },
+    { "nome": "Espátula de Silicone", "desc": "Flexível e resistente ao calor para todos os usos.", "preco": "24,90", "badge": "", "img": "https://images.unsplash.com/photo-1593759608142-e976bcd4d7e8?w=600" },
+    { "nome": "Ralador Inox 4 Faces", "desc": "Versatilidade para ralar e fatiar com precisão.", "preco": "39,90", "badge": "", "img": "https://images.unsplash.com/photo-1556909172-54557c7e4fb7?w=600" },
+    { "nome": "Abridor de Vinho Elétrico", "desc": "Abra sua garrafa com elegância e praticidade.", "preco": "99,90", "badge": "Destaque", "img": "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=600" },
+    { "nome": "Porta Temperos Giratório", "desc": "Deixe seus temperos sempre à mão e organizados.", "preco": "54,90", "badge": "Popular", "img": "https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=600" }
+  ],
+  "decoracao": [
+    { "nome": "Vaso Minimalista", "desc": "Elegância contemporânea para qualquer ambiente.", "preco": "89,90", "badge": "Destaque", "img": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600" },
+    { "nome": "Luminária de Mesa", "desc": "Design sofisticado com luz aconchegante.", "preco": "149,90", "badge": "", "img": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600" },
+    { "nome": "Quadro Abstrato", "desc": "Arte que transforma paredes em experiências.", "preco": "199,90", "badge": "Novo", "img": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600" },
+    { "nome": "Almofada Decorativa", "desc": "Conforto e estilo para sua sala ou quarto.", "preco": "49,90", "badge": "Popular", "img": "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=600" },
+    { "nome": "Espelho Redondo", "desc": "Amplie o espaço e adicione charme ao ambiente.", "preco": "129,90", "badge": "", "img": "https://images.unsplash.com/photo-1618220179428-22790b461013?w=600" },
+    { "nome": "Porta Retratos Triplo", "desc": "Guarde suas memórias com elegância.", "preco": "59,90", "badge": "Novo", "img": "https://images.unsplash.com/photo-1579541814924-49fef17c5be5?w=600" },
+    { "nome": "Planta Artificial Premium", "desc": "Verde o ano todo sem nenhuma manutenção.", "preco": "79,90", "badge": "", "img": "https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=600" },
+    { "nome": "Difusor de Aromas", "desc": "Perfume suave que transforma o clima do lar.", "preco": "69,90", "badge": "Destaque", "img": "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=600" },
+    { "nome": "Relógio de Parede", "desc": "Funcional e bonito para qualquer cômodo.", "preco": "94,90", "badge": "", "img": "https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?w=600" },
+    { "nome": "Bandeja Decorativa", "desc": "Organize e decore ao mesmo tempo.", "preco": "44,90", "badge": "Popular", "img": "https://images.unsplash.com/photo-1616627561839-074385245ff6?w=600" }
+  ],
+  "estudo": [
+    { "nome": "Organizador de Mesa", "desc": "Foco e produtividade com o espaço certo para tudo.", "preco": "69,90", "badge": "Destaque", "img": "https://images.unsplash.com/photo-1583483425010-c566431a7710?w=600" },
+    { "nome": "Caderno Premium A5", "desc": "Páginas de alta qualidade para suas melhores ideias.", "preco": "39,90", "badge": "Novo", "img": "https://images.unsplash.com/photo-1456735190827-d1262f71b8a3?w=600" },
+    { "nome": "Suporte para Notebook", "desc": "Ergonomia e conforto para longas horas de trabalho.", "preco": "99,90", "badge": "", "img": "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600" },
+    { "nome": "Kit Canetas Finas", "desc": "Escrita precisa para anotações e esboços.", "preco": "29,90", "badge": "Popular", "img": "https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?w=600" },
+    { "nome": "Abajur de Escritório", "desc": "Iluminação focada para reduzir o cansaço visual.", "preco": "84,90", "badge": "", "img": "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=600" },
+    { "nome": "Quadro Branco Magnético", "desc": "Planeje suas semanas com clareza e criatividade.", "preco": "119,90", "badge": "Novo", "img": "https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?w=600" },
+    { "nome": "Porta Documentos A4", "desc": "Mantenha seus papéis sempre organizados.", "preco": "34,90", "badge": "", "img": "https://images.unsplash.com/photo-1568667256549-094345857637?w=600" },
+    { "nome": "Mouse Pad XL", "desc": "Superfície ampla para trabalhar com liberdade.", "preco": "44,90", "badge": "Popular", "img": "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=600" },
+    { "nome": "Cronômetro de Mesa", "desc": "Gerencie seu tempo com o método Pomodoro.", "preco": "54,90", "badge": "Destaque", "img": "https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?w=600" },
+    { "nome": "Fone com Cancelamento de Ruído", "desc": "Foco total mesmo nos ambientes mais agitados.", "preco": "189,90", "badge": "Novo", "img": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600" }
+  ],
+  "utilidades": [
+    { "nome": "Organizador Multiuso", "desc": "Praticidade pura em cada detalhe do seu dia.", "preco": "49,90", "badge": "Destaque", "img": "https://images.unsplash.com/photo-1563453392212-326f5e854473?w=600" },
+    { "nome": "Garrafa Térmica 1L", "desc": "Mantenha sua bebida na temperatura ideal por horas.", "preco": "79,90", "badge": "Novo", "img": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600" },
+    { "nome": "Caixa Organizadora", "desc": "Organize armários e gavetas com praticidade.", "preco": "34,90", "badge": "", "img": "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=600" },
+    { "nome": "Cabide Antideslizante Kit 10", "desc": "Guarde suas roupas com cuidado e organização.", "preco": "24,90", "badge": "Popular", "img": "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=600" },
+    { "nome": "Trena Digital", "desc": "Medições precisas para reforma e montagem.", "preco": "64,90", "badge": "", "img": "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=600" },
+    { "nome": "Kit Ferramentas Básico", "desc": "Tenha sempre à mão o essencial para pequenos reparos.", "preco": "89,90", "badge": "Novo", "img": "https://images.unsplash.com/photo-1530124566582-a618bc2615dc?w=600" },
+    { "nome": "Cordão de Varal Retrátil", "desc": "Seque roupas sem ocupar espaço permanente.", "preco": "39,90", "badge": "", "img": "https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=600" },
+    { "nome": "Gancho Adesivo Inox", "desc": "Fixe sem furar, suporta até 5kg.", "preco": "19,90", "badge": "Popular", "img": "https://images.unsplash.com/photo-1558618047-f4e3b0810d0f?w=600" },
+    { "nome": "Sacola Reutilizável", "desc": "Sustentável, resistente e dobrável para o bolso.", "preco": "14,90", "badge": "", "img": "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=600" },
+    { "nome": "Adaptador Universal Tomada", "desc": "Compatível com todos os padrões de tomada.", "preco": "29,90", "badge": "Destaque", "img": "https://images.unsplash.com/photo-1608319161709-2e83af4dd64b?w=600" }
+  ],
+  "higiene": [
+    { "nome": "Kit Banheiro Premium", "desc": "Higiene e estilo reunidos em uma só coleção.", "preco": "119,90", "badge": "Popular", "img": "https://images.unsplash.com/photo-1600857062241-98e5dba7f214?w=600" },
+    { "nome": "Dispenser de Sabonete", "desc": "Design elegante para a pia do seu banheiro.", "preco": "44,90", "badge": "Novo", "img": "https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=600" },
+    { "nome": "Toalha Felpuda Premium", "desc": "Maciez e absorção incomparáveis após o banho.", "preco": "59,90", "badge": "", "img": "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=600" },
+    { "nome": "Porta Escova Inox", "desc": "Acabamento premium para seu banheiro.", "preco": "34,90", "badge": "Destaque", "img": "https://images.unsplash.com/photo-1585421514284-efb74c2b69ba?w=600" },
+    { "nome": "Organizador de Maquiagem", "desc": "Deixe sua bancada sempre arrumada e bonita.", "preco": "54,90", "badge": "Novo", "img": "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600" },
+    { "nome": "Espelho com Aumento 10x", "desc": "Precisão para maquiagem e cuidados faciais.", "preco": "74,90", "badge": "", "img": "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600" },
+    { "nome": "Tapete de Banheiro Antiderrapante", "desc": "Segurança e conforto com um toque de estilo.", "preco": "49,90", "badge": "Popular", "img": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=600" },
+    { "nome": "Nécessaire de Viagem", "desc": "Leve seus itens de higiene com organização.", "preco": "39,90", "badge": "", "img": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600" },
+    { "nome": "Escova Elétrica Dental", "desc": "Limpeza profissional no conforto de casa.", "preco": "149,90", "badge": "Destaque", "img": "https://images.unsplash.com/photo-1559591935-b3d73a7f3aa9?w=600" },
+    { "nome": "Kit Aromaterapia Banho", "desc": "Transforme seu banho em um ritual de bem-estar.", "preco": "84,90", "badge": "Novo", "img": "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=600" }
+  ]
+}

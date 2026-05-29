@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Login</title>
+
+<style>
+
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#0f0f0f;
+    font-family:Arial;
+}
+
+.login-box{
+    width:350px;
+    padding:40px;
+    background:#181818;
+    border-radius:12px;
+    text-align:center;
+    box-shadow:0 0 20px rgba(0,0,0,0.5);
+}
+
+h1{
+    color:#c58b45;
+    margin-bottom:30px;
+    letter-spacing:3px;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    margin-bottom:20px;
+    border:none;
+    outline:none;
+    background:#252525;
+    color:white;
+    border-radius:8px;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:8px;
+    background:#c58b45;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    opacity:0.8;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="login-box">
+
+<h1>ADMIN</h1>
+
+<input type="password" id="senha" placeholder="Digite a senha">
+
+<button onclick="entrar()">
+ENTRAR
+</button>
+
+</div>
+
+<script>
+
+function entrar(){
+
+    const senha = document.getElementById("senha").value;
+
+    if(senha === "admin123"){
+
+        localStorage.setItem("admin", "true");
+
+        window.location.href = "admin-dashboard.html";
+
+    }else{
+
+        alert("Senha incorreta");
+
+    }
+}
+
+</script>
+
+</body>
+</html>

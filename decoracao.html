@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decoracao — Dia a Dia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .cat-hero { margin-top:70px; background:#0d0d0d; padding:4rem 6vw 3rem; border-bottom:1px solid rgba(200,169,110,0.12); display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:1.5rem; }
+        .cat-hero-eyebrow { font-size:0.65rem; font-weight:500; letter-spacing:0.28em; text-transform:uppercase; color:var(--warm); margin-bottom:0.5rem; }
+        .cat-hero-title { font-family:'Playfair Display',serif; font-size:clamp(2.2rem,5vw,3.5rem); font-weight:700; color:var(--cream); line-height:1.05; letter-spacing:-0.01em; }
+        .cat-hero-title span { color:var(--accent); font-style:italic; }
+        .cat-hero-desc { font-size:0.85rem; color:rgba(245,240,232,0.38); margin-top:0.75rem; max-width:340px; line-height:1.7; }
+        .cat-back { font-size:0.7rem; font-weight:400; letter-spacing:0.14em; text-transform:uppercase; color:var(--warm); text-decoration:none; transition:color 0.2s; align-self:flex-start; }
+        .cat-back:hover { color:var(--warm-light); }
+        .prod-price { font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; color:var(--warm); margin-bottom:1rem; letter-spacing:0.02em; }
+        .loading { text-align:center; padding:4rem; color:rgba(245,240,232,0.3); font-size:0.82rem; letter-spacing:0.1em; text-transform:uppercase; }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <a href="index.html" class="logo" style="text-decoration:none">Dia a <span>Dia</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html#inicio">Início</a></li>
+            <li><a href="index.html#categorias">Categorias</a></li>
+            <li><a href="index.html#destaques">Destaques</a></li>
+            <li><a href="index.html#contato">Contato</a></li>
+        </ul>
+    </header>
+
+    <div class="cat-hero">
+        <div>
+            <p class="cat-hero-eyebrow">Categoria</p>
+            <h1 class="cat-hero-title">Deco<span>ração</span></h1>
+            <p class="cat-hero-desc">Peças que transformam ambientes e contam histórias únicas.</p>
+        </div>
+        <a href="index.html#categorias" class="cat-back">← Todas as categorias</a>
+    </div>
+
+    <section class="products-section">
+        <div class="product-grid" id="product-grid">
+            <p class="loading">Carregando produtos...</p>
+        </div>
+    </section>
+
+    <footer class="main-footer">
+        <div class="footer-bottom" style="border-top:none;padding-top:0">
+            <p>&copy; 2025 Dia a Dia. Todos os direitos reservados.</p>
+            <a href="index.html" style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--warm);text-decoration:none;">← Voltar ao início</a>
+        </div>
+    </footer>
+
+    <script>
+        const CATEGORIA = "decoracao";
+
+        fetch("produtos.json")
+            .then(r => r.json())
+            .then(data => {
+                const produtos = data[CATEGORIA] || [];
+                const grid = document.getElementById("product-grid");
+
+                if (produtos.length === 0) {
+                    grid.innerHTML = '<p class="loading">Nenhum produto encontrado.</p>';
+                    return;
+                }
+
+                grid.innerHTML = produtos.map(p => `
+                    <div class="prod-card">
+                        <div class="prod-img" style="background-image:url('${p.img}')">
+                            ${p.badge ? `<span class="prod-badge">${p.badge}</span>` : ""}
+                        </div>
+                        <div class="prod-info">
+                            <p class="prod-category">${p.categoria || CATEGORIA.charAt(0).toUpperCase() + CATEGORIA.slice(1)}</p>
+                            <h4 class="prod-name">${p.nome}</h4>
+                            <p class="prod-desc">${p.desc}</p>
+                            <p class="prod-price">R$ ${p.preco}</p>
+                            <a href="${p.link || '#'}" class="btn-buy">Comprar</a>
+                        </div>
+                    </div>
+                `).join("");
+            })
+            .catch(() => {
+                document.getElementById("product-grid").innerHTML =
+                    '<p class="loading">Erro ao carregar produtos.</p>';
+            });
+    </script>
+
+</body>
+</html>

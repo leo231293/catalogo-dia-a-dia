@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo Dia a Dia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .prod-card-link {
+            text-decoration: none;
+            display: block;
+            color: inherit;
+        }
+        .prod-card-link .prod-card {
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="inicio"></div>
+
+    <header class="navbar">
+        <h1 class="logo">Dia a <span>Dia</span></h1>
+        <ul class="nav-links">
+            <li><a href="#inicio">Início</a></li>
+            <li><a href="#categorias">Categorias</a></li>
+            <li><a href="#destaques">Destaques</a></li>
+            <li><a href="#contato">Contato</a></li>
+        </ul>
+    </header>
+
+    <section class="carousel-wrapper" id="carousel">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1600&h=900&fit=crop')">
+            <div class="slide-content">
+                <p class="slide-tag">Cozinha & Gastronomia</p>
+                <h2 class="slide-title">Eleve sua cozinha a outro nível</h2>
+                <a href="#" class="slide-cta">Explorar coleção</a>
+            </div>
+        </div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1484154218962-a197022b5858?w=1600&h=900&fit=crop')">
+            <div class="slide-content">
+                <p class="slide-tag">Organização & Lar</p>
+                <h2 class="slide-title">Organize seus espaços com estilo</h2>
+                <a href="#" class="slide-cta">Ver produtos</a>
+            </div>
+        </div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&h=900&fit=crop')">
+            <div class="slide-content">
+                <p class="slide-tag">Decoração & Ambiente</p>
+                <h2 class="slide-title">Ambientes que contam histórias</h2>
+                <a href="#" class="slide-cta">Descobrir</a>
+            </div>
+        </div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1513694203232-719a280e022f?w=1600&h=900&fit=crop')">
+            <div class="slide-content">
+                <p class="slide-tag">Estudo & Produtividade</p>
+                <h2 class="slide-title">Foco total no que importa</h2>
+                <a href="#" class="slide-cta">Ver mais</a>
+            </div>
+        </div>
+        <button class="carousel-prev" id="prevBtn">&#8592;</button>
+        <button class="carousel-next" id="nextBtn">&#8594;</button>
+        <div class="carousel-dots" id="dots">
+            <button class="dot active"></button>
+            <button class="dot"></button>
+            <button class="dot"></button>
+            <button class="dot"></button>
+        </div>
+        <div class="carousel-progress" id="progress"></div>
+    </section>
+
+    <section class="categories-section" id="categorias">
+        <div class="categories-track">
+            <a href="cozinha.html" class="cat-item">
+                <div class="cat-circle">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3565/3565407.png" alt="Cozinha">
+                </div>
+                <span class="cat-label">Cozinha</span>
+            </a>
+            <a href="higiene.html" class="cat-item">
+                <div class="cat-circle">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2553/2553642.png" alt="Higiene">
+                </div>
+                <span class="cat-label">Higiene</span>
+            </a>
+            <a href="decoracao.html" class="cat-item">
+                <div class="cat-circle">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1518/1518917.png" alt="Decoração">
+                </div>
+                <span class="cat-label">Decoração</span>
+            </a>
+            <a href="estudo.html" class="cat-item">
+                <div class="cat-circle">
+                    <img src="https://cdn-icons-png.flaticon.com/512/201/201614.png" alt="Estudo">
+                </div>
+                <span class="cat-label">Estudo</span>
+            </a>
+            <a href="utilidades.html" class="cat-item">
+                <div class="cat-circle">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1162/1162456.png" alt="Utilidades">
+                </div>
+                <span class="cat-label">Utilidades</span>
+            </a>
+        </div>
+    </section>
+
+    <div class="strip">
+        <div class="strip-track">
+            <span>Frete Grátis acima de R$150</span> <span class="highlight">✦</span>
+            <span>Novos produtos toda semana</span> <span class="highlight">✦</span>
+            <span>Qualidade garantida</span> <span class="highlight">✦</span>
+            <span>Atendimento personalizado</span> <span class="highlight">✦</span>
+            <span>Frete Grátis acima de R$150</span> <span class="highlight">✦</span>
+            <span>Novos produtos toda semana</span> <span class="highlight">✦</span>
+            <span>Qualidade garantida</span> <span class="highlight">✦</span>
+            <span>Atendimento personalizado</span> <span class="highlight">✦</span>
+        </div>
+    </div>
+
+    <section class="products-section" id="destaques">
+        <div class="section-header">
+            <div>
+                <p class="section-eyebrow">Seleção especial</p>
+                <h2 class="section-title">
+                    <span class="gourmet-highlight">Destaques da Semana</span>
+                </h2>
+            </div>
+            <a href="produtos.html" class="section-link">Ver todos os produtos</a>
+        </div>
+        <div class="product-grid">
+
+            <a href="produtos.html" class="prod-card-link">
+                <div class="prod-card">
+                    <div class="prod-img" style="background-image: url('https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=600')">
+                        <span class="prod-badge">Destaque</span>
+                    </div>
+                    <div class="prod-info">
+                        <p class="prod-category">Cozinha</p>
+                        <h4 class="prod-name">Kit Facas Inox</h4>
+                        <p class="prod-desc">Qualidade profissional para o cozinheiro que há em você.</p>
+                        <span class="btn-buy">Ver no Marketplace</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="produtos.html" class="prod-card-link">
+                <div class="prod-card">
+                    <div class="prod-img" style="background-image: url('https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=600')">
+                        <span class="prod-badge">Novo</span>
+                    </div>
+                    <div class="prod-info">
+                        <p class="prod-category">Quarto</p>
+                        <h4 class="prod-name">Almofada Ortopédica</h4>
+                        <p class="prod-desc">Conforto absoluto para noites de sono reparador.</p>
+                        <span class="btn-buy">Ver no Marketplace</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="produtos.html" class="prod-card-link">
+                <div class="prod-card">
+                    <div class="prod-img" style="background-image: url('https://images.unsplash.com/photo-1583483425010-c566431a7710?w=600')"></div>
+                    <div class="prod-info">
+                        <p class="prod-category">Estudo</p>
+                        <h4 class="prod-name">Organizador de Mesa</h4>
+                        <p class="prod-desc">Foco e produtividade com o espaço certo para tudo.</p>
+                        <span class="btn-buy">Ver no Marketplace</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="produtos.html" class="prod-card-link">
+                <div class="prod-card">
+                    <div class="prod-img" style="background-image: url('https://images.unsplash.com/photo-1600857062241-98e5dba7f214?w=600')">
+                        <span class="prod-badge">Popular</span>
+                    </div>
+                    <div class="prod-info">
+                        <p class="prod-category">Higiene</p>
+                        <h4 class="prod-name">Kit Banheiro</h4>
+                        <p class="prod-desc">Higiene e estilo reunidos em uma só coleção.</p>
+                        <span class="btn-buy">Ver no Marketplace</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="produtos.html" class="prod-card-link">
+                <div class="prod-card">
+                    <div class="prod-img" style="background-image: url('https://images.unsplash.com/photo-1563453392212-326f5e854473?w=600')"></div>
+                    <div class="prod-info">
+                        <p class="prod-category">Utilidades</p>
+                        <h4 class="prod-name">Organizador Multiuso</h4>
+                        <p class="prod-desc">Praticidade pura em cada detalhe do seu dia.</p>
+                        <span class="btn-buy">Ver no Marketplace</span>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+    </section>
+
+    <footer class="main-footer" id="contato">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <span class="logo">Dia a <span>Dia</span></span>
+                <p>Nossa missão é facilitar o seu cotidiano com soluções inteligentes e modernas.</p>
+                <a href="https://wa.me/5547999999999" target="_blank" rel="noopener" class="btn-whats">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width="20" height="20">
+                    Contate-nos pelo WhatsApp
+                </a>
+            </div>
+            <div class="footer-col">
+                <h4>Navegação</h4>
+                <ul>
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#categorias">Categorias</a></li>
+                    <li><a href="#destaques">Destaques</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Feedback</h4>
+                <div class="feedback-form">
+                    <input type="text" id="feedback-nome" placeholder="Seu nome">
+                    <textarea id="feedback-texto" rows="3" placeholder="Deixe seu comentário..."></textarea>
+                    <button type="button" id="feedback-btn">Enviar</button>
+                </div>
+                <div id="feedback-lista"></div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Dia a Dia. Todos os direitos reservados.</p>
+            <a href="admin.html" class="admin-link" id="adminAccess">ACESSO RESTRITO</a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="feedback.js"></script>
+</body>
+</html>
