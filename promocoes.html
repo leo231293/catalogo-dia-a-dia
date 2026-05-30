@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Promoções | Dia a Dia</title>
+<link rel="stylesheet" href="produtos.css">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+    .navbar {
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 5vw;
+        height: 70px;
+        background: rgba(5,5,5,0.97);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(200,169,110,0.15);
+    }
+    .logo {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #f5f0e8;
+        text-decoration: none;
+        letter-spacing: 0.04em;
+    }
+    .logo span { color: #d4703a; font-style: italic; }
+    .nav-back {
+        font-size: 0.7rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--gold);
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--gold-light); }
+
+    /* HERO */
+    .promo-hero {
+        padding: 140px 7vw 60px;
+        position: relative;
+    }
+    .promo-hero::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at top right, rgba(212,112,58,0.06), transparent 40%);
+        pointer-events: none;
+    }
+    .promo-tag {
+        display: block;
+        font-size: 0.72rem;
+        font-weight: 500;
+        letter-spacing: 0.35em;
+        text-transform: uppercase;
+        color: var(--gold-light);
+        margin-bottom: 1.25rem;
+    }
+    .promo-title {
+        font-family: 'Pinyon Script', cursive;
+        font-size: clamp(3.5rem, 8vw, 7rem);
+        font-weight: 400;
+        line-height: 1.15;
+        background: linear-gradient(135deg, #b89753 0%, #fcf6ba 25%, #a37c3f 50%, #fbf5b7 75%, #91692c 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 1rem;
+        padding-right: 20px;
+    }
+    .promo-sub {
+        font-size: 0.88rem;
+        color: var(--muted);
+        max-width: 480px;
+        line-height: 1.8;
+        letter-spacing: 0.04em;
+    }
+
+    /* GRID */
+    .promo-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+        padding: 0 7vw 80px;
+    }
+
+    /* CARD */
+    .promo-card {
+        background: linear-gradient(180deg, #131313, #0c0c0c);
+        border: 1px solid rgba(200,169,110,0.12);
+        overflow: hidden;
+        transition: 0.45s ease;
+        cursor: pointer;
+        text-decoration: none;
+        display: block;
+        color: inherit;
+    }
+    .promo-card:hover {
+        transform: translateY(-10px);
+        border-color: rgba(200,169,110,0.35);
+        box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+    }
+    .promo-img {
+        height: 280px;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+    }
+    .promo-img::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(0,0,0,0.55), transparent);
+    }
+    .promo-badge {
+        position: absolute;
+        top: 18px; left: 18px;
+        z-index: 2;
+        background: #d4703a;
+        color: #fff;
+        padding: 0.45rem 0.9rem;
+        font-size: 0.62rem;
+        font-weight: 600;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+    }
+    .discount-tag {
+        position: absolute;
+        top: 18px; right: 18px;
+        z-index: 2;
+        background: linear-gradient(135deg, #c8a96e, #9f7a3c);
+        color: #111;
+        padding: 0.45rem 0.75rem;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+    }
+    .promo-info { padding: 1.6rem; }
+    .promo-category {
+        color: var(--gold);
+        font-size: 0.68rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        margin-bottom: 0.6rem;
+    }
+    .promo-name {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 0.7rem;
+        line-height: 1.2;
+    }
+    .promo-desc {
+        color: var(--muted);
+        font-size: 0.88rem;
+        line-height: 1.7;
+        margin-bottom: 1.25rem;
+    }
+    .promo-price {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1.4rem;
+        flex-wrap: wrap;
+    }
+    .old-price {
+        color: #555;
+        text-decoration: line-through;
+        font-size: 0.9rem;
+    }
+    .new-price {
+        color: var(--gold-light);
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.6rem;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+    }
+    .btn-whats-card {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        width: 100%;
+        height: 50px;
+        background: linear-gradient(135deg, #c8a96e, #9f7a3c);
+        color: #111;
+        border: none;
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: 0.3s;
+        text-decoration: none;
+    }
+    .btn-whats-card:hover {
+        background: linear-gradient(135deg, #e8d5b0, #c8a96e);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(200,169,110,0.3);
+    }
+    .btn-whats-card img { width: 16px; height: 16px; filter: brightness(0); }
+
+    /* BANNER */
+    .contact-banner {
+        margin: 0 7vw 80px;
+        padding: 3rem 3.5rem;
+        border: 1px solid rgba(200,169,110,0.2);
+        background: linear-gradient(135deg, rgba(200,169,110,0.06), rgba(200,169,110,0.02));
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+    }
+    .contact-banner h3 {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: #f8f6f2;
+        margin-bottom: 0.5rem;
+    }
+    .contact-banner h3 span { color: var(--gold); font-style: italic; }
+    .contact-banner p {
+        font-size: 0.85rem;
+        color: var(--muted);
+        line-height: 1.7;
+        max-width: 420px;
+    }
+    .btn-whats-banner {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        background: #25D366;
+        color: #fff;
+        text-decoration: none;
+        padding: 1rem 2rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        transition: 0.3s;
+        white-space: nowrap;
+    }
+    .btn-whats-banner:hover {
+        background: #1ebe5d;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(37,211,102,0.25);
+    }
+    .btn-whats-banner img { width: 18px; height: 18px; }
+
+    @media (max-width: 768px) {
+        .promo-title { font-size: 3.5rem; }
+        .promo-grid { grid-template-columns: 1fr; }
+        .contact-banner { flex-direction: column; }
+    }
+</style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="logo">Dia a <span>Dia</span></a>
+        <a href="produtos.html" class="nav-back">← Voltar aos produtos</a>
+    </nav>
+
+    <div class="promo-hero">
+        <span class="promo-tag">Ofertas por tempo limitado</span>
+        <h1 class="promo-title">Promoções</h1>
+        <p class="promo-sub">Preços especiais selecionados para você. Clique no produto e fale direto pelo WhatsApp!</p>
+    </div>
+
+    <div class="promo-grid">
+
+        <a href="https://wa.me/5547999999999?text=Olá! Tenho interesse na Almofada Ortopédica que está em promoção." target="_blank" class="promo-card">
+            <div class="promo-img" style="background-image:url('https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=900')">
+                <span class="promo-badge">Oferta</span>
+                <span class="discount-tag">−37%</span>
+            </div>
+            <div class="promo-info">
+                <p class="promo-category">Quarto</p>
+                <h3 class="promo-name">Almofada Ortopédica</h3>
+                <p class="promo-desc">Conforto absoluto para melhorar suas noites de descanso.</p>
+                <div class="promo-price">
+                    <span class="old-price">R$ 159,90</span>
+                    <span class="new-price">R$ 99,90</span>
+                </div>
+                <span class="btn-whats-card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+                    Quero essa oferta
+                </span>
+            </div>
+        </a>
+
+        <a href="https://wa.me/5547999999999?text=Olá! Tenho interesse no Kit Banheiro Luxo que está em promoção." target="_blank" class="promo-card">
+            <div class="promo-img" style="background-image:url('https://images.unsplash.com/photo-1600857062241-98e5dba7f214?w=900')">
+                <span class="promo-badge">Promoção</span>
+                <span class="discount-tag">−32%</span>
+            </div>
+            <div class="promo-info">
+                <p class="promo-category">Banheiro</p>
+                <h3 class="promo-name">Kit Banheiro Luxo</h3>
+                <p class="promo-desc">Design sofisticado para transformar seu ambiente.</p>
+                <div class="promo-price">
+                    <span class="old-price">R$ 249,90</span>
+                    <span class="new-price">R$ 169,90</span>
+                </div>
+                <span class="btn-whats-card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+                    Quero essa oferta
+                </span>
+            </div>
+        </a>
+
+        <a href="https://wa.me/5547999999999?text=Olá! Tenho interesse na Panela Antiaderente que está em promoção." target="_blank" class="promo-card">
+            <div class="promo-img" style="background-image:url('https://images.unsplash.com/photo-1585515320310-259814833e62?w=900')">
+                <span class="promo-badge">Oferta</span>
+                <span class="discount-tag">−25%</span>
+            </div>
+            <div class="promo-info">
+                <p class="promo-category">Cozinha</p>
+                <h3 class="promo-name">Panela Antiaderente</h3>
+                <p class="promo-desc">Cozinhe com menos gordura e muito mais sabor.</p>
+                <div class="promo-price">
+                    <span class="old-price">R$ 119,90</span>
+                    <span class="new-price">R$ 89,90</span>
+                </div>
+                <span class="btn-whats-card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+                    Quero essa oferta
+                </span>
+            </div>
+        </a>
+
+        <a href="https://wa.me/5547999999999?text=Olá! Tenho interesse na Luminária de Mesa que está em promoção." target="_blank" class="promo-card">
+            <div class="promo-img" style="background-image:url('https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900')">
+                <span class="promo-badge">Promoção</span>
+                <span class="discount-tag">−25%</span>
+            </div>
+            <div class="promo-info">
+                <p class="promo-category">Decoração</p>
+                <h3 class="promo-name">Luminária de Mesa</h3>
+                <p class="promo-desc">Design sofisticado com luz aconchegante para qualquer ambiente.</p>
+                <div class="promo-price">
+                    <span class="old-price">R$ 199,90</span>
+                    <span class="new-price">R$ 149,90</span>
+                </div>
+                <span class="btn-whats-card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+                    Quero essa oferta
+                </span>
+            </div>
+        </a>
+
+        <a href="https://wa.me/5547999999999?text=Olá! Tenho interesse no Suporte para Notebook que está em promoção." target="_blank" class="promo-card">
+            <div class="promo-img" style="background-image:url('https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=900')">
+                <span class="promo-badge">Oferta</span>
+                <span class="discount-tag">−23%</span>
+            </div>
+            <div class="promo-info">
+                <p class="promo-category">Estudo</p>
+                <h3 class="promo-name">Suporte para Notebook</h3>
+                <p class="promo-desc">Ergonomia e conforto para longas horas de trabalho.</p>
+                <div class="promo-price">
+                    <span class="old-price">R$ 129,90</span>
+                    <span class="new-price">R$ 99,90</span>
+                </div>
+                <span class="btn-whats-card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+                    Quero essa oferta
+                </span>
+            </div>
+        </a>
+
+        <a href="https://wa.me/5547999999999?text=Olá! Tenho interesse na Escova Elétrica Dental que está em promoção." target="_blank" class="promo-card">
+            <div class="promo-img" style="background-image:url('https://images.unsplash.com/photo-1559591935-b3d73a7f3aa9?w=900')">
+                <span class="promo-badge">Promoção</span>
+                <span class="discount-tag">−25%</span>
+            </div>
+            <div class="promo-info">
+                <p class="promo-category">Higiene</p>
+                <h3 class="promo-name">Escova Elétrica Dental</h3>
+                <p class="promo-desc">Limpeza profissional no conforto de casa.</p>
+                <div class="promo-price">
+                    <span class="old-price">R$ 199,90</span>
+                    <span class="new-price">R$ 149,90</span>
+                </div>
+                <span class="btn-whats-card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+                    Quero essa oferta
+                </span>
+            </div>
+        </a>
+
+    </div>
+
+    <div class="contact-banner">
+        <div>
+            <h3>Garanta sua <span>oferta</span></h3>
+            <p>Clique no produto desejado ou fale diretamente pelo WhatsApp. Atendimento rápido e personalizado!</p>
+        </div>
+        <a href="https://wa.me/5547999999999" target="_blank" class="btn-whats-banner">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+            Falar no WhatsApp
+        </a>
+    </div>
+
+</body>
+</html>

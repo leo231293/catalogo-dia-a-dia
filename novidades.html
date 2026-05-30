@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Novidades | Dia a Dia</title>
+<link rel="stylesheet" href="produtos.css">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+    /* NAVBAR */
+    .navbar {
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 5vw;
+        height: 70px;
+        background: rgba(5,5,5,0.97);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(200,169,110,0.15);
+    }
+    .logo {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #f5f0e8;
+        text-decoration: none;
+        letter-spacing: 0.04em;
+    }
+    .logo span { color: #d4703a; font-style: italic; }
+    .nav-back {
+        font-size: 0.7rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--gold);
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--gold-light); }
+
+    /* HERO */
+    .nov-hero {
+        padding: 140px 7vw 60px;
+        position: relative;
+    }
+    .nov-hero::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at top left, rgba(200,169,110,0.07), transparent 40%);
+        pointer-events: none;
+    }
+    .nov-tag {
+        display: block;
+        font-size: 0.72rem;
+        font-weight: 500;
+        letter-spacing: 0.35em;
+        text-transform: uppercase;
+        color: var(--gold-light);
+        margin-bottom: 1.25rem;
+    }
+    .nov-title {
+        font-family: 'Pinyon Script', cursive;
+        font-size: clamp(3.5rem, 8vw, 7rem);
+        font-weight: 400;
+        line-height: 1.15;
+        background: linear-gradient(135deg, #b89753 0%, #fcf6ba 25%, #a37c3f 50%, #fbf5b7 75%, #91692c 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 1rem;
+        padding-right: 20px;
+    }
+    .nov-sub {
+        font-size: 0.88rem;
+        color: var(--muted);
+        max-width: 480px;
+        line-height: 1.8;
+        letter-spacing: 0.04em;
+    }
+
+    /* GRID */
+    .nov-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+        padding: 0 7vw 80px;
+    }
+
+    /* CARD */
+    .nov-card {
+        background: linear-gradient(180deg, #131313, #0c0c0c);
+        border: 1px solid rgba(200,169,110,0.12);
+        overflow: hidden;
+        transition: 0.45s ease;
+        position: relative;
+    }
+    .nov-card:hover {
+        transform: translateY(-10px);
+        border-color: rgba(200,169,110,0.35);
+        box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+    }
+    .nov-img {
+        height: 280px;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+    }
+    .nov-img::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(0,0,0,0.55), transparent);
+    }
+
+    /* TAG NOVIDADE */
+    .nov-badge {
+        position: absolute;
+        top: 18px; left: 18px;
+        z-index: 2;
+        background: linear-gradient(135deg, #c8a96e, #9f7a3c);
+        color: #111;
+        padding: 0.45rem 0.9rem;
+        font-size: 0.62rem;
+        font-weight: 600;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+    }
+
+    .nov-info { padding: 1.6rem; }
+    .nov-category {
+        color: var(--gold);
+        font-size: 0.68rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        margin-bottom: 0.6rem;
+    }
+    .nov-name {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 0.7rem;
+        line-height: 1.2;
+    }
+    .nov-desc {
+        color: var(--muted);
+        font-size: 0.88rem;
+        line-height: 1.7;
+        margin-bottom: 1.5rem;
+    }
+
+    /* MENSAGEM */
+    .nov-msg {
+        font-size: 0.75rem;
+        color: rgba(200,169,110,0.6);
+        letter-spacing: 0.08em;
+        font-style: italic;
+        margin-bottom: 1.2rem;
+        line-height: 1.6;
+    }
+
+    /* BOTÃO CONTATO */
+    .btn-contato {
+        display: block;
+        width: 100%;
+        height: 50px;
+        border: 1px solid rgba(200,169,110,0.35);
+        background: transparent;
+        color: var(--gold);
+        font-size: 0.72rem;
+        font-weight: 500;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        cursor: pointer;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: 0.3s ease;
+    }
+    .btn-contato:hover {
+        background: rgba(200,169,110,0.1);
+        border-color: var(--gold);
+        color: var(--gold-light);
+        transform: translateY(-2px);
+    }
+
+    /* BANNER CONTATO */
+    .contact-banner {
+        margin: 0 7vw 80px;
+        padding: 3rem 3.5rem;
+        border: 1px solid rgba(200,169,110,0.2);
+        background: linear-gradient(135deg, rgba(200,169,110,0.06), rgba(200,169,110,0.02));
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+    }
+    .contact-banner-text h3 {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 0.5rem;
+    }
+    .contact-banner-text h3 span { color: var(--gold); font-style: italic; }
+    .contact-banner-text p {
+        font-size: 0.85rem;
+        color: var(--muted);
+        line-height: 1.7;
+        max-width: 420px;
+    }
+    .btn-whats-banner {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        background: #25D366;
+        color: #fff;
+        text-decoration: none;
+        padding: 1rem 2rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        transition: 0.3s;
+        white-space: nowrap;
+    }
+    .btn-whats-banner:hover {
+        background: #1ebe5d;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(37,211,102,0.25);
+    }
+    .btn-whats-banner img { width: 18px; height: 18px; }
+
+    @media (max-width: 768px) {
+        .nov-title { font-size: 3.5rem; }
+        .nov-grid { grid-template-columns: 1fr; }
+        .contact-banner { flex-direction: column; }
+    }
+</style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">Dia a <span>Dia</span></a>
+        <a href="produtos.html" class="nav-back">← Voltar aos produtos</a>
+    </nav>
+
+    <!-- HERO -->
+    <div class="nov-hero">
+        <span class="nov-tag">Acabaram de chegar</span>
+        <h1 class="nov-title">Novidades</h1>
+        <p class="nov-sub">Produtos fresquinhos selecionados para você. Gostou de algo? É só nos chamar!</p>
+    </div>
+
+    <!-- GRID DE NOVIDADES -->
+    <div class="nov-grid">
+
+        <div class="nov-card">
+            <div class="nov-img" style="background-image:url('https://images.unsplash.com/photo-1590794056226-79ef3a8147e1?w=900')">
+                <span class="nov-badge">Novidade</span>
+            </div>
+            <div class="nov-info">
+                <p class="nov-category">Cozinha</p>
+                <h3 class="nov-name">Tábua de Corte Bambu</h3>
+                <p class="nov-desc">Resistente, sustentável e elegante. Ideal para o dia a dia na cozinha.</p>
+                <p class="nov-msg">✦ Gostou? Entre em contato e saiba como adquirir.</p>
+                <a href="https://wa.me/5547999999999" target="_blank" class="btn-contato">Quero esse produto</a>
+            </div>
+        </div>
+
+        <div class="nov-card">
+            <div class="nov-img" style="background-image:url('https://images.unsplash.com/photo-1610348725531-843dff563e2c?w=900')">
+                <span class="nov-badge">Novidade</span>
+            </div>
+            <div class="nov-info">
+                <p class="nov-category">Cozinha</p>
+                <h3 class="nov-name">Jogo de Potes Herméticos</h3>
+                <p class="nov-desc">Conserve seus alimentos por mais tempo com praticidade e estilo.</p>
+                <p class="nov-msg">✦ Gostou? Entre em contato e saiba como adquirir.</p>
+                <a href="https://wa.me/5547999999999" target="_blank" class="btn-contato">Quero esse produto</a>
+            </div>
+        </div>
+
+        <div class="nov-card">
+            <div class="nov-img" style="background-image:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900')">
+                <span class="nov-badge">Novidade</span>
+            </div>
+            <div class="nov-info">
+                <p class="nov-category">Decoração</p>
+                <h3 class="nov-name">Quadro Abstrato</h3>
+                <p class="nov-desc">Arte contemporânea para transformar qualquer parede em experiência.</p>
+                <p class="nov-msg">✦ Gostou? Entre em contato e saiba como adquirir.</p>
+                <a href="https://wa.me/5547999999999" target="_blank" class="btn-contato">Quero esse produto</a>
+            </div>
+        </div>
+
+        <div class="nov-card">
+            <div class="nov-img" style="background-image:url('https://images.unsplash.com/photo-1456735190827-d1262f71b8a3?w=900')">
+                <span class="nov-badge">Novidade</span>
+            </div>
+            <div class="nov-info">
+                <p class="nov-category">Estudo</p>
+                <h3 class="nov-name">Caderno Premium A5</h3>
+                <p class="nov-desc">Páginas de alta qualidade para registrar suas melhores ideias.</p>
+                <p class="nov-msg">✦ Gostou? Entre em contato e saiba como adquirir.</p>
+                <a href="https://wa.me/5547999999999" target="_blank" class="btn-contato">Quero esse produto</a>
+            </div>
+        </div>
+
+        <div class="nov-card">
+            <div class="nov-img" style="background-image:url('https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?w=900')">
+                <span class="nov-badge">Novidade</span>
+            </div>
+            <div class="nov-info">
+                <p class="nov-category">Estudo</p>
+                <h3 class="nov-name">Quadro Branco Magnético</h3>
+                <p class="nov-desc">Planeje sua semana com clareza e criatividade.</p>
+                <p class="nov-msg">✦ Gostou? Entre em contato e saiba como adquirir.</p>
+                <a href="https://wa.me/5547999999999" target="_blank" class="btn-contato">Quero esse produto</a>
+            </div>
+        </div>
+
+        <div class="nov-card">
+            <div class="nov-img" style="background-image:url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=900')">
+                <span class="nov-badge">Novidade</span>
+            </div>
+            <div class="nov-info">
+                <p class="nov-category">Higiene</p>
+                <h3 class="nov-name">Organizador de Maquiagem</h3>
+                <p class="nov-desc">Deixe sua bancada sempre arrumada e com muito mais estilo.</p>
+                <p class="nov-msg">✦ Gostou? Entre em contato e saiba como adquirir.</p>
+                <a href="https://wa.me/5547999999999" target="_blank" class="btn-contato">Quero esse produto</a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- BANNER CONTATO -->
+    <div class="contact-banner">
+        <div class="contact-banner-text">
+            <h3>Gostou de algum <span>produto?</span></h3>
+            <p>Entre em contato pelo WhatsApp e nossa equipe vai te ajudar a adquirir o que você precisa com toda atenção.</p>
+        </div>
+        <a href="https://wa.me/5547999999999" target="_blank" class="btn-whats-banner">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+            Falar no WhatsApp
+        </a>
+    </div>
+
+</body>
+</html>

@@ -3,264 +3,95 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Produtos | Dia a Dia</title>
-
 <link rel="stylesheet" href="produtos.css">
-
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+    .painel-cta {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 4rem 7vw 6rem;
+        text-align: center;
+        gap: 1.5rem;
+    }
+    .painel-cta h2 {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: clamp(1.8rem, 3vw, 2.6rem);
+        font-weight: 600;
+        color: #f8f6f2;
+        letter-spacing: -0.01em;
+    }
+    .painel-cta h2 span { color: #c8a96e; font-style: italic; }
+    .painel-cta p {
+        font-size: 0.88rem;
+        color: #8d8578;
+        line-height: 1.8;
+        max-width: 480px;
+        letter-spacing: 0.04em;
+    }
+    .btn-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        background: linear-gradient(135deg, #c8a96e, #9f7a3c);
+        color: #111;
+        text-decoration: none;
+        padding: 1rem 2.5rem;
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        transition: transform 0.3s, box-shadow 0.3s;
+        border: none;
+        cursor: pointer;
+    }
+    .btn-cta:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 30px rgba(200,169,110,0.3);
+    }
+    .btn-cta::after { content: ' →'; }
+</style>
 </head>
-
 <body>
 
 <section class="products-hero">
-
-    <span class="products-tag">
-        CATÁLOGO PREMIUM
-    </span>
-
+    <span class="products-tag">CATÁLOGO PREMIUM</span>
     <h1 class="products-title">
         <span class="gourmet-highlight">Produtos em destaque</span>
     </h1>
-
     <div class="tabs">
-
-        <button class="tab-btn active" onclick="filtrarProdutos('novidades', this)">
-            Novidades
-        </button>
-
-        <button class="tab-btn" onclick="filtrarProdutos('promocoes', this)">
-            Promoções
-        </button>
-
+        <button class="tab-btn active" onclick="filtrarProdutos('novidades', this)">Novidades</button>
+        <button class="tab-btn" onclick="filtrarProdutos('promocoes', this)">Promoções</button>
     </div>
-
 </section>
 
-<section class="products-container">
-
-    <div class="products-grid" id="productsGrid">
-
-        <div class="product-card novidades">
-
-            <div class="product-image"
-            style="background-image:url('https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=900');">
-
-                <span class="product-badge">
-                    Novo
-                </span>
-
-            </div>
-
-            <div class="product-info">
-
-                <p class="product-category">
-                    Cozinha
-                </p>
-
-                <h3 class="product-name">
-                    Kit Facas Premium
-                </h3>
-
-                <p class="product-description">
-                    Facas profissionais em aço inox para elevar sua experiência culinária.
-                </p>
-
-                <div class="product-price">
-
-                    <span class="new-price">
-                        R$ 189,90
-                    </span>
-
-                </div>
-
-                <button class="buy-btn">
-                    Ver Produto
-                </button>
-
-            </div>
-
-        </div>
-
-        <div class="product-card promocoes">
-
-            <div class="product-image"
-            style="background-image:url('https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=900');">
-
-                <span class="product-badge">
-                    Oferta
-                </span>
-
-            </div>
-
-            <div class="product-info">
-
-                <p class="product-category">
-                    Quarto
-                </p>
-
-                <h3 class="product-name">
-                    Almofada Ortopédica
-                </h3>
-
-                <p class="product-description">
-                    Conforto absoluto para melhorar suas noites de descanso.
-                </p>
-
-                <div class="product-price">
-
-                    <span class="old-price">
-                        R$ 159,90
-                    </span>
-
-                    <span class="new-price">
-                        R$ 99,90
-                    </span>
-
-                </div>
-
-                <button class="buy-btn">
-                    Comprar
-                </button>
-
-            </div>
-
-        </div>
-
-        <div class="product-card novidades">
-
-            <div class="product-image"
-            style="background-image:url('https://images.unsplash.com/photo-1583483425010-c566431a7710?w=900');">
-
-                <span class="product-badge">
-                    Novo
-                </span>
-
-            </div>
-
-            <div class="product-info">
-
-                <p class="product-category">
-                    Escritório
-                </p>
-
-                <h3 class="product-name">
-                    Organizador Minimalista
-                </h3>
-
-                <p class="product-description">
-                    Elegância e produtividade para sua mesa de trabalho.
-                </p>
-
-                <div class="product-price">
-
-                    <span class="new-price">
-                        R$ 74,90
-                    </span>
-
-                </div>
-
-                <button class="buy-btn">
-                    Ver Produto
-                </button>
-
-            </div>
-
-        </div>
-
-        <div class="product-card promocoes">
-
-            <div class="product-image"
-            style="background-image:url('https://images.unsplash.com/photo-1600857062241-98e5dba7f214?w=900');">
-
-                <span class="product-badge">
-                    Promoção
-                </span>
-
-            </div>
-
-            <div class="product-info">
-
-                <p class="product-category">
-                    Banheiro
-                </p>
-
-                <h3 class="product-name">
-                    Kit Banheiro Luxo
-                </h3>
-
-                <p class="product-description">
-                    Design sofisticado para transformar seu ambiente.
-                </p>
-
-                <div class="product-price">
-
-                    <span class="old-price">
-                        R$ 249,90
-                    </span>
-
-                    <span class="new-price">
-                        R$ 169,90
-                    </span>
-
-                </div>
-
-                <button class="buy-btn">
-                    Comprar
-                </button>
-
-            </div>
-
-        </div>
-
+<!-- PAINEL NOVIDADES -->
+<div id="painel-novidades">
+    <div class="painel-cta">
+        <h2>Chegaram as <span>Novidades</span></h2>
+        <p>Selecionamos os produtos mais recentes para você. Confira tudo que chegou de novo e entre em contato se gostar de algo.</p>
+        <a href="novidades.html" class="btn-cta">Ver todas as novidades</a>
     </div>
+</div>
 
-</section>
+<!-- PAINEL PROMOÇÕES -->
+<div id="painel-promocoes" style="display:none;">
+    <div class="painel-cta">
+        <h2>Ofertas <span>Especiais</span></h2>
+        <p>Produtos selecionados com preços imperdíveis por tempo limitado. Gostou de algum? Entre em contato e garanta o seu!</p>
+        <a href="promocoes.html" class="btn-cta">Ver todas as promoções</a>
+    </div>
+</div>
 
 <script>
-
-function filtrarProdutos(tipo, botao){
-
-    const cards = document.querySelectorAll('.product-card');
-
-    const botoes = document.querySelectorAll('.tab-btn');
-
-    botoes.forEach(btn=>{
-        btn.classList.remove('active');
-    });
-
+function filtrarProdutos(tipo, botao) {
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
     botao.classList.add('active');
-
-    cards.forEach(card=>{
-
-        if(card.classList.contains(tipo)){
-
-            card.style.display = 'block';
-
-        }else{
-
-            card.style.display = 'none';
-
-        }
-
-    });
-
+    document.getElementById('painel-novidades').style.display = tipo === 'novidades' ? 'block' : 'none';
+    document.getElementById('painel-promocoes').style.display = tipo === 'promocoes' ? 'block' : 'none';
 }
-
-window.onload = () => {
-
-    document.querySelectorAll('.product-card').forEach(card=>{
-
-        if(!card.classList.contains('novidades')){
-
-            card.style.display = 'none';
-
-        }
-
-    });
-
-}
-
 </script>
 
 </body>

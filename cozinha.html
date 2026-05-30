@@ -4,22 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cozinha — Dia a Dia</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
         .cat-hero { margin-top:70px; background:#0d0d0d; padding:4rem 6vw 3rem; border-bottom:1px solid rgba(200,169,110,0.12); display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:1.5rem; }
         .cat-hero-eyebrow { font-size:0.65rem; font-weight:500; letter-spacing:0.28em; text-transform:uppercase; color:var(--warm); margin-bottom:0.5rem; }
-        .cat-hero-title { font-family:'Playfair Display',serif; font-size:clamp(2.2rem,5vw,3.5rem); font-weight:700; color:var(--cream); line-height:1.05; letter-spacing:-0.01em; }
+        .cat-hero-title { font-family:'Cormorant Garamond',serif; font-size:clamp(2.2rem,5vw,3.5rem); font-weight:700; color:var(--cream); line-height:1.05; }
         .cat-hero-title span { color:var(--accent); font-style:italic; }
         .cat-hero-desc { font-size:0.85rem; color:rgba(245,240,232,0.38); margin-top:0.75rem; max-width:340px; line-height:1.7; }
-        .cat-back { font-size:0.7rem; font-weight:400; letter-spacing:0.14em; text-transform:uppercase; color:var(--warm); text-decoration:none; transition:color 0.2s; align-self:flex-start; }
+        .cat-back { font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--warm); text-decoration:none; transition:color 0.2s; align-self:flex-start; }
         .cat-back:hover { color:var(--warm-light); }
-        .prod-price { font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; color:var(--warm); margin-bottom:1rem; letter-spacing:0.02em; }
-        .loading { text-align:center; padding:4rem; color:rgba(245,240,232,0.3); font-size:0.82rem; letter-spacing:0.1em; text-transform:uppercase; }
+        .prod-price { font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:700; color:var(--warm); margin-bottom:1rem; }
+        .btn-whats-prod {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            text-decoration: none;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #25D366;
+            border-bottom: 1px solid rgba(37,211,102,0.3);
+            padding-bottom: 2px;
+            transition: color 0.2s, border-color 0.2s;
+        }
+        .btn-whats-prod::after { content: ' →'; display:inline-block; transition: transform 0.2s; }
+        .btn-whats-prod:hover { color: #1ebe5d; border-color: #1ebe5d; }
+        .btn-whats-prod:hover::after { transform: translateX(4px); }
+        .btn-whats-prod img { width:14px; height:14px; }
     </style>
 </head>
 <body>
-
     <header class="navbar">
         <a href="index.html" class="logo" style="text-decoration:none">Dia a <span>Dia</span></a>
         <ul class="nav-links">
@@ -41,7 +57,7 @@
 
     <section class="products-section">
         <div class="product-grid" id="product-grid">
-            <p class="loading">Carregando produtos...</p>
+            <p style="color:rgba(245,240,232,0.3);font-size:0.82rem;letter-spacing:0.1em;text-transform:uppercase;text-align:center;padding:4rem 0;grid-column:1/-1">Carregando produtos...</p>
         </div>
     </section>
 
@@ -54,38 +70,32 @@
 
     <script>
         const CATEGORIA = "cozinha";
+        const WHATS = "5547999999999";
 
         fetch("produtos.json")
             .then(r => r.json())
             .then(data => {
                 const produtos = data[CATEGORIA] || [];
                 const grid = document.getElementById("product-grid");
-
-                if (produtos.length === 0) {
-                    grid.innerHTML = '<p class="loading">Nenhum produto encontrado.</p>';
-                    return;
-                }
-
+                if (!produtos.length) { grid.innerHTML = '<p style="color:rgba(245,240,232,0.3);text-align:center;padding:4rem 0;grid-column:1/-1">Nenhum produto encontrado.</p>'; return; }
                 grid.innerHTML = produtos.map(p => `
                     <div class="prod-card">
                         <div class="prod-img" style="background-image:url('${p.img}')">
                             ${p.badge ? `<span class="prod-badge">${p.badge}</span>` : ""}
                         </div>
                         <div class="prod-info">
-                            <p class="prod-category">${p.categoria || CATEGORIA.charAt(0).toUpperCase() + CATEGORIA.slice(1)}</p>
+                            <p class="prod-category">${CATEGORIA.charAt(0).toUpperCase()+CATEGORIA.slice(1)}</p>
                             <h4 class="prod-name">${p.nome}</h4>
                             <p class="prod-desc">${p.desc}</p>
                             <p class="prod-price">R$ ${p.preco}</p>
-                            <a href="${p.link || '#'}" class="btn-buy">Comprar</a>
+                            <a href="https://wa.me/${WHATS}?text=Olá! Tenho interesse no produto: ${encodeURIComponent(p.nome)}" target="_blank" class="btn-whats-prod">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+                                Tenho interesse
+                            </a>
                         </div>
                     </div>
                 `).join("");
-            })
-            .catch(() => {
-                document.getElementById("product-grid").innerHTML =
-                    '<p class="loading">Erro ao carregar produtos.</p>';
             });
     </script>
-
 </body>
 </html>
