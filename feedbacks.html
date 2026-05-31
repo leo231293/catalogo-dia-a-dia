@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moderação de Feedbacks — Dia a Dia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --card: #111111;
+            --gold: #c8a96e;
+            --gold-light: #e8d5b0;
+            --accent: #d4703a;
+            --muted: #7a7060;
+            --cream: #f5f0e8;
+            --border: rgba(200,169,110,0.15);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: var(--bg); color: var(--cream); font-family: 'Jost', sans-serif; font-weight: 300; min-height: 100vh; }
+
+        /* LOCK */
+        #lock-screen {
+            position: fixed; inset: 0; background: var(--bg); z-index: 999;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .lock-box { text-align: center; width: 320px; }
+        .lock-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 700; color: var(--cream); display: block; margin-bottom: 2.5rem; }
+        .lock-logo span { color: var(--accent); font-style: italic; }
+        .lock-label { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 1.25rem; }
+        .lock-input { width: 100%; background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: var(--cream); padding: 0.85rem 1rem; font-family: 'Jost', sans-serif; font-size: 0.9rem; letter-spacing: 0.15em; border-radius: 2px; outline: none; text-align: center; transition: border-color 0.2s; margin-bottom: 1rem; }
+        .lock-input:focus { border-color: var(--gold); }
+        .lock-input.erro { border-color: var(--accent); }
+        .lock-btn { width: 100%; background: linear-gradient(135deg, #c8a96e, #9f7a3c); color: #111; border: none; padding: 0.85rem; font-family: 'Jost', sans-serif; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; border-radius: 2px; transition: opacity 0.2s; }
+        .lock-btn:hover { opacity: 0.85; }
+        .lock-erro { font-size: 0.75rem; color: var(--accent); margin-top: 0.75rem; display: none; }
+
+        /* NAVBAR */
+        .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 5vw; height: 64px; background: rgba(10,10,10,0.97); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+        .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 700; color: var(--cream); text-decoration: none; }
+        .logo span { color: var(--accent); font-style: italic; }
+        .nav-right { display: flex; align-items: center; gap: 1.5rem; }
+        .nav-badge { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); background: rgba(200,169,110,0.08); border: 1px solid var(--border); padding: 4px 10px; border-radius: 2px; }
+        .nav-back { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(245,240,232,0.4); text-decoration: none; transition: color 0.2s; }
+        .nav-back:hover { color: var(--gold); }
+
+        /* HERO */
+        .hero { margin-top: 64px; background: #0d0d0d; padding: 3.5rem 6vw 2.5rem; border-bottom: 1px solid var(--border); display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+        .hero-eyebrow { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+        .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 700; color: var(--cream); }
+
+        /* STATS */
+        .stats { display: flex; gap: 1rem; padding: 2rem 6vw; flex-wrap: wrap; }
+        .stat { background: var(--card); border: 1px solid var(--border); border-radius: 2px; padding: 1rem 1.5rem; min-width: 130px; }
+        .stat-label { font-size: 0.6rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
+        .stat-value { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 700; color: var(--gold); line-height: 1; }
+
+        /* ABAS */
+        .tabs { display: flex; padding: 0 6vw; border-bottom: 1px solid var(--border); background: #0d0d0d; }
+        .tab-btn { background: none; border: none; border-bottom: 2px solid transparent; font-family: 'Jost', sans-serif; font-size: 0.7rem; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(245,240,232,0.35); padding: 1rem 0; margin-right: 2.5rem; cursor: pointer; transition: color 0.2s, border-color 0.2s; }
+        .tab-btn.active { color: var(--gold-light); border-bottom-color: var(--gold); }
+        .tab-btn:hover { color: var(--gold); }
+        .tab-count { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; font-size: 0.58rem; font-weight: 500; margin-left: 6px; vertical-align: middle; }
+        .count-pendente { background: rgba(200,169,110,0.15); color: var(--gold); }
+        .count-aprovado { background: rgba(46,204,113,0.15); color: #2ecc71; }
+
+        /* CONTEÚDO */
+        .content { padding: 2rem 6vw 4rem; }
+        .panel { display: none; }
+        .panel.active { display: block; animation: fadeUp 0.3s ease; }
+        @keyframes fadeUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+        /* PANEL HEADER */
+        .panel-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem; }
+        .panel-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; color: var(--cream); }
+        .btn-limpar { background: none; border: 1px solid rgba(212,112,58,0.2); color: var(--muted); font-family: 'Jost', sans-serif; font-size: 0.65rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.5rem 1rem; cursor: pointer; border-radius: 2px; transition: border-color 0.2s, color 0.2s; }
+        .btn-limpar:hover { border-color: var(--accent); color: var(--accent); }
+
+        /* GRID */
+        .fb-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1rem; }
+
+        /* CARD */
+        .fb-card { background: var(--card); border: 1px solid var(--border); border-radius: 2px; padding: 1.25rem 1.4rem; animation: fadeUp 0.3s ease; }
+        .fb-card.pendente { border-left: 3px solid var(--gold); }
+        .fb-card.aprovado { border-left: 3px solid #2ecc71; }
+        .fb-status { font-size: 0.58rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; padding: 3px 8px; border-radius: 2px; display: inline-block; margin-bottom: 0.75rem; }
+        .fb-status.pendente { background: rgba(200,169,110,0.1); color: var(--gold); }
+        .fb-status.aprovado { background: rgba(46,204,113,0.1); color: #2ecc71; }
+        .fb-nome { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; }
+        .fb-texto { font-size: 0.85rem; color: rgba(245,240,232,0.6); line-height: 1.6; margin-bottom: 0.5rem; }
+        .fb-data { font-size: 0.65rem; color: var(--muted); margin-bottom: 1rem; }
+        .fb-actions { display: flex; gap: 0.5rem; }
+        .btn-aprovar { flex: 1; border: none; padding: 0.5rem; font-family: 'Jost', sans-serif; font-size: 0.65rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; border-radius: 2px; background: #2ecc71; color: #fff; transition: opacity 0.2s; }
+        .btn-aprovar:hover { opacity: 0.85; }
+        .btn-recusar { flex: 1; border: 1px solid rgba(212,112,58,0.3); background: none; padding: 0.5rem; font-family: 'Jost', sans-serif; font-size: 0.65rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); cursor: pointer; border-radius: 2px; transition: background 0.2s; }
+        .btn-recusar:hover { background: rgba(212,112,58,0.1); }
+        .btn-remover { width: 100%; border: 1px solid rgba(212,112,58,0.2); background: none; padding: 0.5rem; font-family: 'Jost', sans-serif; font-size: 0.65rem; color: var(--muted); cursor: pointer; border-radius: 2px; margin-top: 0.5rem; transition: color 0.2s, border-color 0.2s; letter-spacing: 0.1em; text-transform: uppercase; }
+        .btn-remover:hover { color: var(--accent); border-color: var(--accent); }
+        .fb-empty { grid-column: 1/-1; text-align: center; padding: 3rem 0; color: var(--muted); font-size: 0.82rem; letter-spacing: 0.08em; }
+
+        @media (max-width: 768px) { .fb-grid { grid-template-columns: 1fr; } .stats { flex-direction: column; } }
+    </style>
+</head>
+<body>
+
+    <!-- LOCK -->
+    <div id="lock-screen">
+        <div class="lock-box">
+            <span class="lock-logo">Dia a <span>Dia</span></span>
+            <span class="lock-label">Moderação de Feedbacks</span>
+            <input type="password" id="lock-input" class="lock-input" placeholder="••••••••" autocomplete="off">
+            <button class="lock-btn" id="lock-btn">Entrar</button>
+            <p class="lock-erro" id="lock-erro">Senha incorreta.</p>
+        </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">Dia a <span>Dia</span></a>
+        <div class="nav-right">
+            <span class="nav-badge">Moderação</span>
+            <a href="index.html" class="nav-back">← Voltar ao site</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <div class="hero">
+        <div>
+            <p class="hero-eyebrow">Administração</p>
+            <h1 class="hero-title">Central de Feedbacks</h1>
+        </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats" id="stats"></div>
+
+    <!-- ABAS -->
+    <div class="tabs">
+        <button class="tab-btn active" onclick="showTab('pendentes', this)">
+            Pendentes <span class="tab-count count-pendente" id="count-pendentes">0</span>
+        </button>
+        <button class="tab-btn" onclick="showTab('aprovados', this)">
+            Aprovados <span class="tab-count count-aprovado" id="count-aprovados">0</span>
+        </button>
+    </div>
+
+    <!-- CONTEÚDO -->
+    <div class="content">
+        <div class="panel active" id="panel-pendentes">
+            <div class="panel-header">
+                <p class="panel-title">Aguardando moderação</p>
+                <button class="btn-limpar" onclick="limparPendentes()">Limpar todos</button>
+            </div>
+            <div class="fb-grid" id="grid-pendentes"></div>
+        </div>
+
+        <div class="panel" id="panel-aprovados">
+            <div class="panel-header">
+                <p class="panel-title">Comentários aprovados</p>
+                <button class="btn-limpar" onclick="limparAprovados()">Limpar todos</button>
+            </div>
+            <div class="fb-grid" id="grid-aprovados"></div>
+        </div>
+    </div>
+
+    <script>
+        const SENHA        = "diaadia2025";
+        const KEY_PENDING  = "diaadia_feedbacks";
+        const KEY_APPROVED = "diaadia_aprovados";
+
+        // ─── LOCK ───
+        const lockScreen = document.getElementById("lock-screen");
+        const lockInput  = document.getElementById("lock-input");
+        const lockBtn    = document.getElementById("lock-btn");
+        const lockErro   = document.getElementById("lock-erro");
+
+        function tentarEntrar() {
+            if (lockInput.value === SENHA) {
+                lockScreen.style.opacity = "0";
+                lockScreen.style.transition = "opacity 0.4s";
+                setTimeout(() => lockScreen.style.display = "none", 400);
+                renderTudo();
+            } else {
+                lockInput.classList.add("erro");
+                lockErro.style.display = "block";
+                lockInput.value = "";
+                setTimeout(() => { lockInput.classList.remove("erro"); lockErro.style.display = "none"; }, 2500);
+            }
+        }
+        lockBtn.addEventListener("click", tentarEntrar);
+        lockInput.addEventListener("keydown", e => { if (e.key === "Enter") tentarEntrar(); });
+
+        // ─── ABAS ───
+        function showTab(id, btn) {
+            document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
+            document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+            document.getElementById("panel-" + id).classList.add("active");
+            btn.classList.add("active");
+        }
+
+        // ─── HELPERS ───
+        function getPending()  { return JSON.parse(localStorage.getItem(KEY_PENDING)  || "[]"); }
+        function getApproved() { return JSON.parse(localStorage.getItem(KEY_APPROVED) || "[]"); }
+        function escapeHtml(str) { return str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+        function formatarData(iso) { if (!iso) return "—"; const d = new Date(iso); return d.toLocaleDateString("pt-BR") + " às " + d.toLocaleTimeString("pt-BR", { hour:"2-digit", minute:"2-digit" }); }
+
+        // ─── AÇÕES ───
+        function aprovar(i) {
+            const p = getPending(), a = getApproved();
+            const fb = p.splice(i, 1)[0];
+            fb.aprovadoEm = new Date().toISOString();
+            a.unshift(fb);
+            localStorage.setItem(KEY_PENDING, JSON.stringify(p));
+            localStorage.setItem(KEY_APPROVED, JSON.stringify(a));
+            renderTudo();
+        }
+        function recusar(i) {
+            const p = getPending();
+            p.splice(i, 1);
+            localStorage.setItem(KEY_PENDING, JSON.stringify(p));
+            renderTudo();
+        }
+        function removerAprovado(i) {
+            const a = getApproved();
+            a.splice(i, 1);
+            localStorage.setItem(KEY_APPROVED, JSON.stringify(a));
+            renderTudo();
+        }
+        function limparPendentes() { if (confirm("Apagar todos os pendentes?")) { localStorage.removeItem(KEY_PENDING); renderTudo(); } }
+        function limparAprovados() { if (confirm("Apagar todos os aprovados?")) { localStorage.removeItem(KEY_APPROVED); renderTudo(); } }
+
+        // ─── RENDER ───
+        function renderPendentes() {
+            const fbs = getPending();
+            document.getElementById("count-pendentes").textContent = fbs.length;
+            const grid = document.getElementById("grid-pendentes");
+            if (!fbs.length) { grid.innerHTML = '<p class="fb-empty">Nenhum feedback pendente.</p>'; return; }
+            grid.innerHTML = fbs.map((fb, i) => `
+                <div class="fb-card pendente">
+                    <span class="fb-status pendente">Pendente</span>
+                    <p class="fb-nome">${escapeHtml(fb.nome)}</p>
+                    <p class="fb-texto">"${escapeHtml(fb.texto)}"</p>
+                    <p class="fb-data">${formatarData(fb.data)}</p>
+                    <div class="fb-actions">
+                        <button class="btn-aprovar" onclick="aprovar(${i})">✓ Aprovar</button>
+                        <button class="btn-recusar" onclick="recusar(${i})">✕ Recusar</button>
+                    </div>
+                </div>
+            `).join("");
+        }
+
+        function renderAprovados() {
+            const fbs = getApproved();
+            document.getElementById("count-aprovados").textContent = fbs.length;
+            const grid = document.getElementById("grid-aprovados");
+            if (!fbs.length) { grid.innerHTML = '<p class="fb-empty">Nenhum feedback aprovado ainda.</p>'; return; }
+            grid.innerHTML = fbs.map((fb, i) => `
+                <div class="fb-card aprovado">
+                    <span class="fb-status aprovado">Aprovado</span>
+                    <p class="fb-nome">${escapeHtml(fb.nome)}</p>
+                    <p class="fb-texto">"${escapeHtml(fb.texto)}"</p>
+                    <p class="fb-data">Recebido: ${formatarData(fb.data)}</p>
+                    <button class="btn-remover" onclick="removerAprovado(${i})">Remover aprovação</button>
+                </div>
+            `).join("");
+        }
+
+        function renderStats() {
+            const p = getPending(), a = getApproved();
+            document.getElementById("stats").innerHTML = `
+                <div class="stat"><p class="stat-label">Pendentes</p><p class="stat-value">${p.length}</p></div>
+                <div class="stat"><p class="stat-label">Aprovados</p><p class="stat-value" style="color:#2ecc71">${a.length}</p></div>
+                <div class="stat"><p class="stat-label">Total</p><p class="stat-value">${p.length + a.length}</p></div>
+            `;
+        }
+
+        function renderTudo() { renderStats(); renderPendentes(); renderAprovados(); }
+    </script>
+</body>
+</html>
