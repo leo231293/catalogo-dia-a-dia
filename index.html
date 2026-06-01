@@ -83,12 +83,13 @@
             padding: 5rem 6vw 0;
         }
         .footer-top {
-            display: grid;
-            grid-template-columns: 1.6fr 1fr 1fr 1fr;
-            gap: 3rem;
-            padding-bottom: 4rem;
-            border-bottom: 1px solid rgba(200,169,110,0.08);
-        }
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1.4fr;
+    gap: 3rem;
+    padding-bottom: 4rem;
+    border-bottom: 1px solid rgba(200,169,110,0.08);
+    align-items: start;
+}
         .footer-brand .logo {
             font-family: 'Playfair Display', serif;
             font-size: 1.4rem;
@@ -154,19 +155,29 @@
             color: var(--warm-light);
             transform: translateX(4px);
         }
-        .feedback-form { display: flex; flex-direction: column; gap: 0.65rem; }
+        .feedback-form { display: flex; flex-direction: column; gap: 0.65rem; width: 100%; }
         .feedback-form input,
         .feedback-form textarea {
             background: rgba(255,255,255,0.03);
             border: 1px solid rgba(200,169,110,0.12);
             color: var(--cream);
-            padding: 0.65rem 0.85rem;
+            padding: 0.55rem 0.75rem;
             font-family: 'DM Sans', sans-serif;
-            font-size: 0.78rem;
+            font-size: 0.75rem;
             border-radius: 2px;
             outline: none;
             transition: border-color 0.25s;
             resize: none;
+            width: 100%;
+        }
+        .feedback-form input {
+            height: 34px;
+        }
+        .feedback-form textarea {
+            height: 62px;
+            resize: vertical;
+            min-height: 52px;
+            max-height: 120px;
         }
         .feedback-form input::placeholder,
         .feedback-form textarea::placeholder { color: rgba(245,240,232,0.18); }
@@ -188,22 +199,41 @@
             transition: opacity 0.2s, transform 0.2s;
         }
         .feedback-form button:hover { opacity: 0.85; transform: translateY(-1px); }
-        #feedback-lista { margin-top: 1rem; display: flex; flex-direction: column; gap: 0.6rem; }
+        #feedback-lista {
+    margin-top: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    width: 100%;
+}
         .feedback-item {
-            background: rgba(255,255,255,0.03);
-            border-left: 2px solid var(--warm);
-            padding: 0.55rem 0.85rem;
-            border-radius: 2px;
-        }
+    background: rgba(255,255,255,0.04);
+    border-left: 3px solid var(--warm);
+    padding: 1rem;
+    border-radius: 6px;
+    min-height: 130px;
+    transition: all 0.3s ease;
+}
+
+.feedback-item:hover {
+    transform: translateY(-4px);
+    background: rgba(255,255,255,0.06);
+}
+        
         .feedback-item .fb-nome {
-            font-size: 0.65rem;
-            font-weight: 500;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--warm);
-            margin-bottom: 0.2rem;
-        }
-        .feedback-item .fb-texto { font-size: 0.78rem; color: rgba(245,240,232,0.45); line-height: 1.5; }
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--warm);
+    margin-bottom: 0.5rem;
+}
+        
+       .feedback-item .fb-texto {
+    font-size: 0.9rem;
+    color: rgba(245,240,232,0.65);
+    line-height: 1.7;
+}
         .feedback-sucesso { font-size: 0.72rem; color: var(--warm-light); margin-top: 0.4rem; display: none; }
         .feedback-sucesso.visivel { display: block; }
         .footer-bottom {
@@ -449,14 +479,15 @@
             </div>
 
             <div class="footer-col">
-                <h4>Feedback</h4>
-                <div class="feedback-form">
+    <h4>Feedback</h4>
+    <div class="feedback-form">
                     <input type="text" id="feedback-nome" placeholder="Seu nome">
-                    <textarea id="feedback-texto" rows="3" placeholder="Deixe seu comentário..."></textarea>
+                    <textarea id="feedback-texto" rows="2" placeholder="Deixe seu comentário..."></textarea>
                     <button type="button" id="feedback-btn">Enviar</button>
                 </div>
-                <div id="feedback-lista"></div>
-            </div>
+</div>
+
+<div id="feedback-lista"></div>
 
         </div>
 
@@ -488,15 +519,18 @@
                     .replace(/"/g, "&quot;");
             }
 
-            track.innerHTML = todos.map(fb => `
+            track.innerHTML = todos.map(fb => {
+                const n = fb.estrelas || 5;
+                const stars = "★".repeat(n) + "☆".repeat(5 - n);
+                return `
                 <span class="review-item">
-                    <span class="review-stars">★★★★★</span>
+                    <span class="review-stars">${stars}</span>
                     <span class="review-nome">${escapeHtml(fb.nome)}</span>
                     <span class="review-sep">—</span>
                     <span class="review-texto">${escapeHtml(fb.texto)}</span>
                 </span>
-                <span class="review-divider">✦</span>
-            `).join("");
+                <span class="review-divider">✦</span>`;
+            }).join("");
 
             strip.style.display = "block";
         })();

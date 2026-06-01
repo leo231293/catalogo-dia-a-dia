@@ -235,18 +235,22 @@
             document.getElementById("count-pendentes").textContent = fbs.length;
             const grid = document.getElementById("grid-pendentes");
             if (!fbs.length) { grid.innerHTML = '<p class="fb-empty">Nenhum feedback pendente.</p>'; return; }
-            grid.innerHTML = fbs.map((fb, i) => `
+            grid.innerHTML = fbs.map((fb, i) => {
+                const n = fb.estrelas || 5;
+                const stars = "★".repeat(n) + "☆".repeat(5 - n);
+                return `
                 <div class="fb-card pendente">
                     <span class="fb-status pendente">Pendente</span>
                     <p class="fb-nome">${escapeHtml(fb.nome)}</p>
+                    <p style="color:#c8a96e;font-size:0.85rem;margin-bottom:0.4rem;">${stars}</p>
                     <p class="fb-texto">"${escapeHtml(fb.texto)}"</p>
                     <p class="fb-data">${formatarData(fb.data)}</p>
                     <div class="fb-actions">
                         <button class="btn-aprovar" onclick="aprovar(${i})">✓ Aprovar</button>
                         <button class="btn-recusar" onclick="recusar(${i})">✕ Recusar</button>
                     </div>
-                </div>
-            `).join("");
+                </div>`;
+            }).join("");
         }
 
         function renderAprovados() {
@@ -254,15 +258,19 @@
             document.getElementById("count-aprovados").textContent = fbs.length;
             const grid = document.getElementById("grid-aprovados");
             if (!fbs.length) { grid.innerHTML = '<p class="fb-empty">Nenhum feedback aprovado ainda.</p>'; return; }
-            grid.innerHTML = fbs.map((fb, i) => `
+            grid.innerHTML = fbs.map((fb, i) => {
+                const n = fb.estrelas || 5;
+                const stars = "★".repeat(n) + "☆".repeat(5 - n);
+                return `
                 <div class="fb-card aprovado">
                     <span class="fb-status aprovado">Aprovado</span>
                     <p class="fb-nome">${escapeHtml(fb.nome)}</p>
+                    <p style="color:#c8a96e;font-size:0.85rem;margin-bottom:0.4rem;">${stars}</p>
                     <p class="fb-texto">"${escapeHtml(fb.texto)}"</p>
                     <p class="fb-data">Recebido: ${formatarData(fb.data)}</p>
                     <button class="btn-remover" onclick="removerAprovado(${i})">Remover aprovação</button>
-                </div>
-            `).join("");
+                </div>`;
+            }).join("");
         }
 
         function renderStats() {
