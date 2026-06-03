@@ -47,3 +47,47 @@ document.addEventListener("keydown", (e) => {
 });
 
 autoPlay();
+const btnMobile = document.getElementById("btn-mobile");
+
+function toggleMenu(event) {
+  if (event.type === "touchstart") event.preventDefault();
+
+  const navbar = document.querySelector(".navbar");
+  navbar.classList.toggle("active");
+
+  const active = navbar.classList.contains("active");
+  document.body.style.overflow = active ? "hidden" : "";
+  event.currentTarget.setAttribute("aria-expanded", active);
+  event.currentTarget.setAttribute(
+    "aria-label",
+    active ? "Fechar menu" : "Abrir menu",
+  );
+}
+
+btnMobile.addEventListener("click", toggleMenu);
+btnMobile.addEventListener("touchstart", toggleMenu);
+
+// Fechar ao clicar nos links
+const menuLinks = document.querySelectorAll(".nav-links a");
+menuLinks.forEach((link) => {
+  link.addEventListener("click", () => {
+    const navbar = document.querySelector(".navbar");
+    navbar.classList.remove("active");
+    document.body.style.overflow = "";
+    btnMobile.setAttribute("aria-expanded", false);
+    btnMobile.setAttribute("aria-label", "Abrir menu");
+  });
+});
+
+// Fechar ao clicar fora
+document.addEventListener("click", (event) => {
+  const navbar = document.querySelector(".navbar");
+  const clickDentro = navbar.contains(event.target);
+
+  if (!clickDentro && navbar.classList.contains("active")) {
+    navbar.classList.remove("active");
+    document.body.style.overflow = "";
+    btnMobile.setAttribute("aria-expanded", false);
+    btnMobile.setAttribute("aria-label", "Abrir menu");
+  }
+});

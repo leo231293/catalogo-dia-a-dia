@@ -621,21 +621,83 @@ body {
 }
 .admin-link:hover { color: var(--warm); }
 
+/* FORA do media query — botão oculto no desktop */
+#btn-mobile {
+    display: none;
+}
+
+/* FORA do media query — animação cascata */
+.nav-links li {
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
 /* ─── RESPONSIVO ─────────────────────────────────────────── */
 @media (max-width: 768px) {
-    .nav-links { display: none; }
+
+    .nav-links {
+        display: block;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: rgba(11, 11, 11, 0.97);
+        height: 0;
+        overflow: hidden;
+        visibility: hidden;
+        transition: height 0.4s ease, visibility 0.4s;
+        z-index: 99;
+    }
+    .navbar.active .nav-links {
+        height: calc(100vh - 70px);
+        visibility: visible;
+    }
+    .nav-links li { display: block; }
+    .nav-links a {
+        display: block;
+        padding: 1rem 2rem;
+        border-bottom: 1px solid rgba(200, 169, 110, 0.1);
+        font-size: 0.9rem;
+    }
+    .navbar.active .nav-links li:nth-child(1) { opacity: 1; transform: none; transition-delay: 0.1s; }
+    .navbar.active .nav-links li:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.2s; }
+    .navbar.active .nav-links li:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.3s; }
+    .navbar.active .nav-links li:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.4s; }
+    #btn-mobile {
+        display: flex;
+        align-items: center;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: var(--cream);
+        padding: 0.5rem;
+    }
+    #hamburger {
+        display: block;
+        width: 22px;
+        border-top: 2px solid currentColor;
+    }
+    #hamburger::before,
+    #hamburger::after {
+        content: "";
+        display: block;
+        width: 22px;
+        height: 2px;
+        background: currentColor;
+        margin-top: 5px;
+        transition: 0.3s;
+        position: relative;
+    }
+    .navbar.active #hamburger { border-top-color: transparent; }
+    .navbar.active #hamburger::before { transform: rotate(135deg); }
+    .navbar.active #hamburger::after { transform: rotate(-135deg); top: -7px; }
+
     .carousel-wrapper { height: 65vh; }
     .slide-title { font-size: 1.8rem; }
     .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
-    
 }
-/* ─── RESPONSIVO ─────────────────────────────────────────── */
-@media (max-width: 768px) {
-    .nav-links { display: none; }
-    .carousel-wrapper { height: 65vh; }
-    .slide-title { font-size: 1.8rem; }
-    .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
-}
+
 
 /* ─── CARD LINK ─────────────────────────────────────────── */
 .prod-card-link {
